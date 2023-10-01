@@ -49,14 +49,20 @@ function addFunction(event) {
     event.target.style.backgroundColor = 'yellow';
 }
 
+function subtractFunction(event) {
+    typeOfMath = '-';
+    clearFunctions();
+    event.target.style.backgroundColor = 'yellow';
+}
+
 function clearFunctions() {
     for (let button of buttonColor) {
         button.style.backgroundColor = 'white';
     }
 }
 
-function subtractFunction(event) {
-    typeOfMath = '-';
+function clearInputs(event) {
     clearFunctions();
-    event.target.style.backgroundColor = 'yellow';
+    document.querySelector('#first-number').value = '';
+    document.querySelector('#second-number').value = '';
 }
