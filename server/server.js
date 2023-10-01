@@ -35,6 +35,10 @@ function getAnswer(newCalc) {
     } else {
         console.log('Something went wrong');
     }
+    app.get('/finalAnswer', (req, res) => {
+        stringAnswer = newCalc.finalAnswer.toString();
+        res.send(stringAnswer);
+    })
     calculator.push(newCalc);
     console.log(calculator);
 }
