@@ -2,12 +2,17 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <link href="./style/style.css" rel="stylesheet">
         <title>Server Side Calculator</title>
+
     </head>
     <body>
         <h1>Server Side Calculator!</h1>
+        <div id="calculator">
         <form onSubmit="runNumbers(event)">
             <input type="text" id="first-number">
+            <input type="button" id="add-button" class="typeOfMath" onClick="addFunction(event)" value="+">
+            <input type="button" id="subtract-button" class="typeOfMath" onClick="subtractFunction(event)" value="-">
             <input type="text" id="second-number">
             <button>=</button>
         </form>
@@ -21,7 +26,7 @@
 
             </tbody>
         </table>
-
+    </div>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="./scripts/client.js"></script>
     </body>
