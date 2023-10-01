@@ -17,10 +17,11 @@ app.post('/calculate', (req, res) => {
 })
 
 
-
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+app.get('/calculate', (req, res) => {
+    res.send(calculator);
 })
+
+
 
 function getAnswer(newCalc) {
     if (newCalc.typeOfMath == '+') {
@@ -35,3 +36,9 @@ function getAnswer(newCalc) {
     calculator.push(newCalc);
     console.log(calculator);
 }
+
+
+
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
+})

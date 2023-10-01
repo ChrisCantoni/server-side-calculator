@@ -23,20 +23,24 @@ function runNumbers(event) {
         console.error(error);
         alert('Something went wrong');
     })
-    // if (typeOfMath == '+') {
-    //     finalAnswer = firstNumber + secondNumber;
-        
-    // } else if (typeOfMath == '-') {
-    //     finalAnswer = firstNumber - secondNumber;
-    // }
-        
-    //     else {
-    //         console.log('Something went wrong');
-    //     }
-    //     answerDisplay.innerHTML += `
-    //         <tr>
-    //             <td>${firstNumber} ${typeOfMath} ${secondNumber}</td>
-    //             <td>= ${finalAnswer}</td>`
+    displayEquations();
+}
+
+function displayEquations() {
+    axios.get('/calculate').then((response) => {
+        let equations = response.data;
+        console.log(equations);
+        answerDisplay.innerHTML = '';
+        for (let equation of equations) {
+            answerDisplay.innerHTML += `
+            <tr>
+                <td>${equation.firstNumber} ${equation.typeOfMath} ${equation.secondNumber}</td>
+                <td> = ${equation.finalAnswer}</td>`
+        }
+    }).catch((error) => {
+        console.error(error);
+        alert('Equations could not be displayed.')
+    })
 }
 
 function addFunction(event) {
