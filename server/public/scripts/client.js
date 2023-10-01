@@ -55,6 +55,18 @@ function subtractFunction(event) {
     event.target.style.backgroundColor = 'yellow';
 }
 
+function multiplyFunction(event) {
+    typeOfMath = '*';
+    clearFunctions();
+    event.target.style.backgroundColor = 'yellow';
+}
+
+function divideFunction(event) {
+    typeOfMath = '/';
+    clearFunctions();
+    event.target.style.backgroundColor = 'yellow';
+}
+
 function clearFunctions() {
     for (let button of buttonColor) {
         button.style.backgroundColor = 'white';

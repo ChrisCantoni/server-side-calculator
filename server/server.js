@@ -28,9 +28,11 @@ function getAnswer(newCalc) {
         newCalc.finalAnswer = newCalc.firstNumber + newCalc.secondNumber;
     } else if (newCalc.typeOfMath == '-') {
         newCalc.finalAnswer = newCalc.firstNumber - newCalc.secondNumber;
-    }
-        
-    else {
+    } else if (newCalc.typeOfMath == '*') {
+        newCalc.finalAnswer = newCalc.firstNumber * newCalc.secondNumber;
+    } else if (newCalc.typeOfMath == '/') {
+        newCalc.finalAnswer = newCalc.firstNumber / newCalc.secondNumber;
+    } else {
         console.log('Something went wrong');
     }
     calculator.push(newCalc);
