@@ -24,13 +24,13 @@ app.get('/calculate', (req, res) => {
 
 
 function getAnswer(newCalc) {
-    if (newCalc.typeOfMath == '+') {
+    if (newCalc.operator == '+') {
         newCalc.finalAnswer = newCalc.firstNumber + newCalc.secondNumber;
-    } else if (newCalc.typeOfMath == '-') {
+    } else if (newCalc.operator == '-') {
         newCalc.finalAnswer = newCalc.firstNumber - newCalc.secondNumber;
-    } else if (newCalc.typeOfMath == '*') {
+    } else if (newCalc.operator == '*') {
         newCalc.finalAnswer = newCalc.firstNumber * newCalc.secondNumber;
-    } else if (newCalc.typeOfMath == '/') {
+    } else if (newCalc.operator == '/') {
         newCalc.finalAnswer = newCalc.firstNumber / newCalc.secondNumber;
     } else {
         console.log('Something went wrong');

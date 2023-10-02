@@ -10,15 +10,32 @@
         <h1>Server Side Calculator!</h1>
         <div id="calculator">
         <form onSubmit="runNumbers(event)">
-            <input type="text" id="first-number">
-            <input type="button" id="add-button" class="typeOfMath" onClick="addFunction(event)" value="+">
-            <input type="button" id="subtract-button" class="typeOfMath" onClick="subtractFunction(event)" value="-">
-            <input type="button" id="multiply-button" class="typeOfMath" onClick="multiplyFunction(event)" value="*">
-            <input type="button" id="divide-button" class="typeOfMath" onClick="divideFunction(event)" value="/">
-            <input type="text" id="second-number">
+            <input type="text" id="equation-input">
+            <br />
+            <input type="button" id="one" value="1" onClick="displayClick(this.value)">
+            <input type="button" id="two" value="2" onClick="displayClick(this.value)">
+            <input type="button" id="three" value="3" onClick="displayClick(this.value)">
+            <input type="button" id="add-button" class="operator" onClick="displayClick(this.value)" value="+">
+            <br />
+            <input type="button" id="four" value="4" onClick="displayClick(this.value)">
+            <input type="button" id="five" value="5" onClick="displayClick(this.value)">
+            <input type="button" id="six" value="6" onClick="displayClick(this.value)">
+            <input type="button" id="subtract-button" class="operator" onClick="subtractFunction(event)" value="-">
+            <br />
+            <input type="button" id="seven" value="7" onClick="displayClick(this.value)">
+            <input type="button" id="eight" value="8" onClick="displayClick(this.value)">
+            <input type="button" id="nine" value="9" onClick="displayClick(this.value)">
+            <input type="button" id="multiply-button" class="operator" onClick="multiplyFunction(event)" value="*">
+            <br />
+            <input type="button" id="zero" value="0" onClick="displayClick(this.value)">
+            <input type="button" id="decimal" value="." onClick="displayClick(this.value)">
             <button>=</button>
+            <input type="button" id="divide-button" class="operator" onClick="divideFunction(event)" value="/">
+            <br />
+            <!-- Have onClick run both the typeOfMath functions and a function to display the value on input field -->            
         </form>
-        <button onClick="clearInputs(event)">Clear Data</button>
+        <button onClick="clearInputs(event)">Clear Input</button>
+        <button>Clear History</button>
 
         <h2 id="answer-display"></h2>
         <table>
