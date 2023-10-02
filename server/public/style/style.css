@@ -1,6 +1,10 @@
 
 
-.typeOfMath {
+.operator {
     background-color:white;
     font-size:medium;
+}
+
+.number {
+    font-size:large;
 }

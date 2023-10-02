@@ -70,24 +70,28 @@ displayEquations();
 
 function addFunction(event) {
     operator = '+';
+    displayOperator(operator);
     clearFunctions(); // clear every other color if you change it
     event.target.style.backgroundColor = 'yellow';
 }
 
 function subtractFunction(event) {
     operator = '-';
+    displayOperator(operator);
     clearFunctions();
     event.target.style.backgroundColor = 'yellow';
 }
 
 function multiplyFunction(event) {
     operator = '*';
+    displayOperator(operator);
     clearFunctions();
     event.target.style.backgroundColor = 'yellow';
 }
 
 function divideFunction(event) {
     operator = '/';
+    displayOperator(operator);
     clearFunctions();
     event.target.style.backgroundColor = 'yellow';
 }
@@ -100,8 +104,7 @@ function clearFunctions() {
 
 function clearInputs(event) {
     clearFunctions();
-    document.querySelector('#first-number').value = '';
-    document.querySelector('#second-number').value = '';
+    document.querySelector('#equation-input').value = '';
 }
 
 // Click on an equation to display the answer
@@ -116,13 +119,18 @@ function displayAnswer(answer) {
 }
 
 function displayClick(val) {
+    document.querySelector('#equation-input').value += val;
+    console.log(document.querySelector('#equation-input').value);
+}
+
+
+function displayOperator(val) {
     let input = document.querySelector('#equation-input').value;
     console.log(input);
-    if (input.includes('+', '-', '*', '/')) {
+    if (input.includes('+') || input.includes('-') || input.includes('*')  || input.includes('/')) {
         console.log('This happened.');
         return;
     } else {
     document.querySelector('#equation-input').value += val;
-    console.log(document.querySelector('#equation-input').value);
-    }
+}
 }
