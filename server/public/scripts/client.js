@@ -3,28 +3,32 @@ console.log('client.js sourced');
 let answerDisplay = document.querySelector('#answer-display');
 let equationDisplay = document.querySelector('#equation-display');
 let operator = '';
+const operatorArray = ['+', '-', '*', '/'];
 const buttonColor = document.getElementsByClassName('operator');
 console.log(calculator);
 
 function runNumbers(event) {
     event.preventDefault();
     let equationInput = document.querySelector('#equation-input').value;
-    //firstNumber = Number(firstNumber);
-    //let secondNumber = document.querySelector('#second-number').value;
-    //secondNumber = Number(secondNumber);
+    let firstNumber;
+    let secondNumber;
 
     // Check if any part of the input is missing
-    if (!equationInput.includes('+', '-', '*', '/') || !/^\d/.test(equationInput) || !/\d+$/.test(equationInput)) {
+    if (!(equationInput.includes('+') || equationInput.includes('-') || equationInput.includes('*') || equationInput.includes('/')) || !/^\d/.test(equationInput) || !/\d+$/.test(equationInput)) {
         console.log(`${equationInput} is invalid`);
         alert('Please enter a valid equation');
         return;
     } else {
-        equationInput.split('')
-        console.log('Cant do both!');
+        equationArray = equationInput.split(`${operator}`)
+        firstNumber = equationArray[0];
+        secondNumber = equationArray[1];
+        console.log(firstNumber);
+        console.log(secondNumber);
+        console.log(operator);
         return;
     }
     //let finalAnswer = 0;
-    // IF OPERATOR == '' THEN DO NOTHING - FOR STRETCH GOAL
+    
     // USE .SPLIT() TO SEPARATE FIRST NUMBER AND SECOND NUMBER!
     // USE .CONTAINS() TO CHECK FOR A MATH OPERATOR.
     // USE .IndexOf() to check that the first and last of the string are numbers!
