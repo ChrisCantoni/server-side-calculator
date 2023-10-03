@@ -10,7 +10,6 @@ const calculator = [];
 
 
 app.post('/calculate', (req, res) => {
-    console.log(req.body);
     let newCalc = req.body;
     getAnswer(newCalc);
     res.sendStatus(201);
@@ -23,25 +22,45 @@ app.get('/calculate', (req, res) => {
 
 
 
-function getAnswer(newCalc) {
-    if (newCalc.operator == '+') {
-        newCalc.finalAnswer = newCalc.firstNumber + newCalc.secondNumber;
-    } else if (newCalc.operator == '-') {
-        newCalc.finalAnswer = newCalc.firstNumber - newCalc.secondNumber;
-    } else if (newCalc.operator == '*') {
-        newCalc.finalAnswer = newCalc.firstNumber * newCalc.secondNumber;
-    } else if (newCalc.operator == '/') {
-        newCalc.finalAnswer = newCalc.firstNumber / newCalc.secondNumber;
+function getAnswer(equation) {
+    if (equation.operator == '+') {
+        equation.finalAnswer = equation.firstNumber + equation.secondNumber;
+        console.log(`Final answer calculated: ${equation.finalAnswer}`);
+    } else if (equation.operator == '-') {
+        equation.finalAnswer = equation.firstNumber - equation.secondNumber;
+    } else if (equation.operator == '*') {
+        equation.finalAnswer = equation.firstNumber * equation.secondNumber;
+    } else if (equation.operator == '/') {
+        equation.finalAnswer = equation.firstNumber / equation.secondNumber;
     } else {
         console.log('Something went wrong');
     }
-    app.get('/finalAnswer', (req, res) => {
-        stringAnswer = newCalc.finalAnswer.toString();
-        res.send(stringAnswer);
-    })
-    calculator.push(newCalc);
+    displayCalc(equation);
+    calculator.push(equation);
+    console.log(`Outside of app.get: ${equation.finalAnswer}`)
     console.log(calculator);
 }
+
+app.post('/display', (req, res) => {
+    console.log(req.body);
+    let redoEquation = req.body;
+    displayCalc(redoEquation);
+    res.sendStatus(201);
+})
+
+function displayCalc(equation) {
+    app.get('/finalAnswer', (req, res) => {
+        console.log('we are in displayCalc')
+        console.log(`newCalc is: ${equation.firstNumber} ${equation.secondNumber}`);
+        console.log(`The answer is ${equation.finalAnswer}`);
+        stringAnswer = equation.finalAnswer.toString();
+        res.send(stringAnswer);
+    })
+}
+// app.delete('/calculate', (req, res) => {
+//     calculator = [];
+//     res.sendStatus(201);
+// })
 
 
 

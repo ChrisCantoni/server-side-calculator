@@ -3,7 +3,7 @@ console.log('client.js sourced');
 let answerDisplay = document.querySelector('#answer-display');
 let equationDisplay = document.querySelector('#equation-display');
 let operator = '';
-const operatorArray = ['+', '-', '*', '/'];
+let historyCount = 0;
 const buttonColor = document.getElementsByClassName('operator');
 console.log(calculator);
 
@@ -22,17 +22,12 @@ function runNumbers(event) {
         equationArray = equationInput.split(`${operator}`)
         firstNumber = equationArray[0];
         secondNumber = equationArray[1];
-        console.log(firstNumber);
-        console.log(secondNumber);
-        console.log(operator);
-        return;
+        // Gotta turn them back into numbers!
+        firstNumber = Number(firstNumber);
+        secondNumber = Number(secondNumber);
     }
-    //let finalAnswer = 0;
-    
-    // USE .SPLIT() TO SEPARATE FIRST NUMBER AND SECOND NUMBER!
-    // USE .CONTAINS() TO CHECK FOR A MATH OPERATOR.
-    // USE .IndexOf() to check that the first and last of the string are numbers!
-     console.log(`${firstNumber} ${operator} ${secondNumber}`);
+        // DISPLAY IS ONLY SHOWING THE FIRST FINAL ANSWER
+     console.log(`This is ${firstNumber} ${operator} ${secondNumber}`);
     axios.post('/calculate', {
         firstNumber: firstNumber,
         operator: operator,
@@ -44,6 +39,7 @@ function runNumbers(event) {
         alert('Something went wrong');
     })
     axios.get('/finalAnswer').then((response) => {
+        console.log(`Response data: ${response.data}`)
         let finalAnswer = response.data;
         console.log(finalAnswer);
         answerDisplay.innerHTML = `${finalAnswer}`;
@@ -52,6 +48,8 @@ function runNumbers(event) {
         alert('Could not display final answer');
     })
     displayEquations();
+    clearInputs();
+    
 }
 
 function displayEquations() {
@@ -61,10 +59,12 @@ function displayEquations() {
         equationDisplay.innerHTML = '';
         for (let equation of equations) {
             equationDisplay.innerHTML += `
-            <tr onClick="displayAnswer(${equation.finalAnswer})">
+            <tr onClick="displayAnswer(event)">
                 <td>${equation.firstNumber} ${equation.operator} ${equation.secondNumber}</td>
                 <td> = ${equation.finalAnswer}</td>`
+                historyCount++
         }
+        historyCount = 0;
     }).catch((error) => {
         console.error(error);
         alert('Equations could not be displayed.')
@@ -117,24 +117,47 @@ function clearInputs(event) {
 // So: onClick="resubmit(CalculatorArray[i])" so the server will know exactly which 
 // equation to resubmit. Also need to display it at the top.
 // Could even just send a number and let the number figure it out.
-function displayAnswer(answer) {
-    console.log(answer);
-    answerDisplay.innerHTML = answer;
+function displayAnswer(event) {
+    console.log(event.target.innerHTML);
+    let redoEquation = event.target.innerHTML;
+    redoEquation = redoEquation.split(' ');
+    console.log(redoEquation);
+    let redoFirst = Number(redoEquation[0]);
+    let redoOperator = redoEquation[1];
+    let redoSecond = Number(redoEquation[2]);
+    axios.post('/display', {
+        firstNumber: redoFirst,
+        operator: redoOperator,
+        secondNumber: redoSecond
+    }).then((response) => {
+        console.log(`Checking calculations`)
+    }).catch((error) => {
+        console.error(error);
+        alert("Could not recalculate");
+    })
 }
 
 function displayClick(val) {
     document.querySelector('#equation-input').value += val;
-    console.log(document.querySelector('#equation-input').value);
 }
 
-
+// Rewrite this so that it takes direct input from operator buttons and uses those to run ONE operator function
+// If that's possible to keep the effect.
 function displayOperator(val) {
     let input = document.querySelector('#equation-input').value;
-    console.log(input);
     if (input.includes('+') || input.includes('-') || input.includes('*')  || input.includes('/')) {
-        console.log('This happened.');
+        console.log("Can't add another operator");
         return;
     } else {
     document.querySelector('#equation-input').value += val;
 }
 }
+
+// function clearHistory(event) {
+//     axios.delete('/calculate').then((response) => {
+//         console.log('Delete request sent to server');
+//     }).catch((error) => {
+//         console.error(error);
+//         alert('History could not be deleted');
+//     })
+// }
