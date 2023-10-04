@@ -20,36 +20,44 @@ function runNumbers(event) {
         return;
     } else {
         equationArray = equationInput.split(`${operator}`)
-        firstNumber = equationArray[0];
-        secondNumber = equationArray[1];
-        // Gotta turn them back into numbers!
-        firstNumber = Number(firstNumber);
-        secondNumber = Number(secondNumber);
+        // firstNumber = equationArray[0];
+        // secondNumber = equationArray[1];
+        // // Gotta turn them back into numbers!
+        // firstNumber = Number(firstNumber);
+        // secondNumber = Number(secondNumber);
+        sendEquationToServer(equationArray)
     }
         // DISPLAY IS ONLY SHOWING THE FIRST FINAL ANSWER
-     console.log(`This is ${firstNumber} ${operator} ${secondNumber}`);
-    axios.post('/calculate', {
-        firstNumber: firstNumber,
+
+     // TODO: Take axios.post out of this function and make it its own function for
+     // TODO: sending each calculation to the server
+
+    // axios.get('/finalAnswer').then((response) => {
+    //     console.log(`Response data: ${response.data}`)
+    //     let finalAnswer = response.data;
+    //     console.log(finalAnswer);
+    //     answerDisplay.innerHTML = `${finalAnswer}`;
+    // }).catch((error) => {
+    //     console.error(error);
+    //     alert('Could not display final answer');
+    // })
+    displayEquations();
+    clearInputs();
+}
+
+// TODO: Fix this to work with clicking on an equation
+function sendEquationToServer(equationInput) {
+    console.log(equationInput);
+        axios.post('/calculate', {
+        firstNumber: Number(equationInput[0]),
         operator: operator,
-        secondNumber: secondNumber
+        secondNumber: Number(equationInput[1])
     }).then((response) => {
         console.log('Calculation sent to server');
     }).catch((error) => {
         console.error(error);
         alert('Something went wrong');
     })
-    axios.get('/finalAnswer').then((response) => {
-        console.log(`Response data: ${response.data}`)
-        let finalAnswer = response.data;
-        console.log(finalAnswer);
-        answerDisplay.innerHTML = `${finalAnswer}`;
-    }).catch((error) => {
-        console.error(error);
-        alert('Could not display final answer');
-    })
-    displayEquations();
-    clearInputs();
-    
 }
 
 function displayEquations() {
@@ -72,32 +80,18 @@ function displayEquations() {
 }
 displayEquations();
 
-function addFunction(event) {
-    operator = '+';
-    displayOperator(operator);
-    clearFunctions(); // clear every other color if you change it
-    event.target.style.backgroundColor = 'yellow';
-}
-
-function subtractFunction(event) {
-    operator = '-';
-    displayOperator(operator);
-    clearFunctions();
-    event.target.style.backgroundColor = 'yellow';
-}
-
-function multiplyFunction(event) {
-    operator = '*';
-    displayOperator(operator);
-    clearFunctions();
-    event.target.style.backgroundColor = 'yellow';
-}
-
-function divideFunction(event) {
-    operator = '/';
-    displayOperator(operator);
-    clearFunctions();
-    event.target.style.backgroundColor = 'yellow';
+// Condensed setting the operator into this one function!
+function displayOperator(val, event) {
+    let input = document.querySelector('#equation-input').value;
+    if (input.includes('+') || input.includes('-') || input.includes('*')  || input.includes('/')) {
+        console.log("Can't add another operator");
+        return;
+    } else {
+        operator = val;
+        clearFunctions();
+        event.target.style.backgroundColor = 'yellow';
+        document.querySelector('#equation-input').value += val;
+    }
 }
 
 function clearFunctions() {
@@ -111,6 +105,8 @@ function clearInputs(event) {
     document.querySelector('#equation-input').value = '';
 }
 
+// TODO: Right idea for the below but wrong execution.
+// TODO: Use today's lecture to figure out a better way
 // Click on an equation to display the answer
 // Change this to RESEND the function to server
 // Use its position in the server Calculator array to create the onClick
@@ -136,22 +132,14 @@ function displayAnswer(event) {
         alert("Could not recalculate");
     })
 }
+// TODO: For displaying the answer when you click, GET request to get the answer at a certain index
+
 
 function displayClick(val) {
     document.querySelector('#equation-input').value += val;
 }
 
-// Rewrite this so that it takes direct input from operator buttons and uses those to run ONE operator function
-// If that's possible to keep the effect.
-function displayOperator(val) {
-    let input = document.querySelector('#equation-input').value;
-    if (input.includes('+') || input.includes('-') || input.includes('*')  || input.includes('/')) {
-        console.log("Can't add another operator");
-        return;
-    } else {
-    document.querySelector('#equation-input').value += val;
-}
-}
+
 
 // function clearHistory(event) {
 //     axios.delete('/calculate').then((response) => {

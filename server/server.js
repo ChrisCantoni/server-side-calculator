@@ -20,8 +20,6 @@ app.get('/calculate', (req, res) => {
     res.send(calculator);
 })
 
-
-
 function getAnswer(equation) {
     if (equation.operator == '+') {
         equation.finalAnswer = equation.firstNumber + equation.secondNumber;
@@ -35,12 +33,14 @@ function getAnswer(equation) {
     } else {
         console.log('Something went wrong');
     }
+    console.log(`Before app.get ${equation.finalAnswer}`);
     displayCalc(equation);
     calculator.push(equation);
     console.log(`Outside of app.get: ${equation.finalAnswer}`)
     console.log(calculator);
 }
-
+// TODO: Redo the original app.post instead of this
+// Get rid of the below
 app.post('/display', (req, res) => {
     console.log(req.body);
     let redoEquation = req.body;
@@ -51,7 +51,7 @@ app.post('/display', (req, res) => {
 function displayCalc(equation) {
     app.get('/finalAnswer', (req, res) => {
         console.log('we are in displayCalc')
-        console.log(`newCalc is: ${equation.firstNumber} ${equation.secondNumber}`);
+        console.log(`Equation is: ${equation.firstNumber} ${equation.operator} ${equation.secondNumber}`);
         console.log(`The answer is ${equation.finalAnswer}`);
         stringAnswer = equation.finalAnswer.toString();
         res.send(stringAnswer);
