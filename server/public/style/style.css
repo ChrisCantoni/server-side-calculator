@@ -1,14 +1,118 @@
+.display {
+    min-width: 210px;
+    min-height: 88px;
+    display: inline-block;
+    width: auto;
+    background-color:#B6C6D9;
+    text-align: center;
+    display:inline-block;
+    border: 2px solid black;
+    margin-top: 0;  
+    padding: 5px;  
+}
 
+h3 {
+    margin: 0;
+    text-align: left;
+}
 
 .operator {
-    background-color:white;
-    font-size:medium;
+    background-color: white;
+    font-size:large;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+
 }
 
 .number {
-    font-size:large;
+    border: none;
+    background-color: white;
+    font-size:x-large;
+    border-radius: 5px;
 }
 
 .input-field {
     font-size: large;
+}
+
+table {
+    width: auto;
+    margin: 5px;
+    border-collapse: collapse;
+    border: 1px solid grey;
+    font-weight: 700;
+    font-size:large;
+}
+
+
+
+td, th {
+    border: 1px solid grey;
+    padding: 8px;
+    margin: 2px;
+    text-align: left;
+
+}
+
+tr:nth-child(even){
+    background-color:#B6C6D9;
+}
+
+
+#calculator {
+    display: flex;
+    width: 220px;
+    background-color:#ACD9D9;
+    border: 2px solid black;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding-bottom: 5px;
+}
+
+#equation-input {
+    margin: 10px;
+    width: 170px;
+}
+
+#top-row {
+    margin-top: 5px;
+    display: flex;
+    justify-content:space-around;
+}
+
+#middle-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+#bottom-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+#zero-row {
+    display: flex;
+    justify-content:space-around;
+}
+
+button {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: large;
+    display: flex;
+    justify-self: end;
+}
+
+.clear {
+    width: 170px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.number,
+.operator {
+    min-width: 33px;
+    min-height: 33px;
 }
