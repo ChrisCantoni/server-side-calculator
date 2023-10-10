@@ -4,7 +4,9 @@ Server-side Calculator
 
 ## Description
 
-This project was designed to build a fully-functioning calculator app utilizing server-side calculations and replicating your typical handheld calculator. The calculator can be used for decimal input, and can add, subtract, multiply, and divide. Equations are only calculated once an appropriate sequence of number, operator, number has been entered. There are also buttons to clear the input field as well as clear the history of calculations, which display themselves below the calculator itself.
+This project required me to build a fully-functioning calculator app utilizing server-side calculations and replicating your typical handheld calculator. The calculator can be used for decimal input, and can add, subtract, multiply, and divide. Equations are only calculated once an appropriate sequence of number, operator, number has been entered. Once an equation is ready, the input is sent to the server to calculate and then return the answer and display it on the DOM, additionally keeping a history of equations below the display.
+
+There are also buttons to clear the input field as well as clear the history of calculations, which display themselves below the calculator itself.
 
 Clicking on any calculation will rerun that calculation and display the results, as well as adding that calculation to the bottom of the calculator's history.
 
