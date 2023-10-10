@@ -8,7 +8,7 @@ This project required me to build a fully-functioning calculator app utilizing s
 
 There are also buttons to clear the input field as well as clear the history of calculations, which display themselves below the calculator itself.
 
-Clicking on any calculation will rerun that calculation and display the results, as well as adding that calculation to the bottom of the calculator's history.
+Clicking on any calculation will rerun that calculation and display the results, as well as losslessly adding that calculation to the bottom of the calculator's history.
 
 The calculator was designed to have a familiar layout for ease of use, with large button text to make each button and its function clear.
 
