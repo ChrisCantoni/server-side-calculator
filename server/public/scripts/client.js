@@ -5,12 +5,10 @@ let equationDisplay = document.querySelector('#equation-display');
 let operator = '';
 const buttonColor = document.getElementsByClassName('operator');
 
+// for receiving the input from the calculator
 function runNumbers(event) {
     event.preventDefault();
     let equationInput = document.querySelector('#equation-input').value;
-    let firstNumber;
-    let secondNumber;
-
     // Check if any part of the input is missing
     if (!(equationInput.includes('+') || equationInput.includes('-') || equationInput.includes('*') || equationInput.includes('/')) || !/^\d/.test(equationInput) || !/\d+$/.test(equationInput)) {
         console.log(`${equationInput} is invalid`);
@@ -22,6 +20,7 @@ function runNumbers(event) {
     }
 }
 
+// For sending input to server
 function sendEquationToServer(equationInput) {
     console.log(equationInput);
         axios.post('/calculate', {
@@ -70,11 +69,11 @@ function displayOperator(val, event) {
         console.log("Can't add another operator");
         return;
     } else {
-        // added spaces around my operators for readability so gotta get rid of those!
-        operator = val.trim(); 
+        // Added spaces around my operators for readability
+        operator = val.trim();// Removed the spaces to the operators can operate!
         clearFunctions();
-        event.target.style.backgroundColor = '#D9C096';
-        document.querySelector('#equation-input').value += val;
+        event.target.style.backgroundColor = '#D9C096'; // Adds a color to the selected operator so you know you selected it.
+        document.querySelector('#equation-input').value += val; // Adds operator to input
     }
 }
 // This function clears all operators of any color
@@ -89,7 +88,7 @@ function clearInputs(event) {
     document.querySelector('#equation-input').value = '';
 }
 
-
+// Reruns a specific equation by making a request to the server
 function redoEquation(index) {
     console.log('Redo Equation at', index);
     axios.get(`/calculate/${index}`).then(() => {
@@ -115,7 +114,3 @@ function clearHistory(index) {
         alert('History could not be deleted');
     })
 }
-
-console.log(parseFloat(1/3));
-console.log(parseFloat(0.33333));
-console.log(parseFloat(1/2))

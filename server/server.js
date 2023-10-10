@@ -20,6 +20,7 @@ app.get('/calculate/:index', (req, res) => {
     getAnswer(calculator[index]); // Send equation to be redone
     //calculator.splice(`${index}`, 1); // Remove equation from array (to be added at the bottom)
     // Removed but left in just in case I wanted to re-implement it
+    // I am not 100% sure my solution is the intended one, but here we are!
     res.sendStatus(200);
 })
 
@@ -44,7 +45,7 @@ function getAnswer(equation) {
     }
     if (!Number.isInteger(equation.finalAnswer)) {
         console.log(equation.finalAnswer);
-        // Arbitrarily stopping decimal places at 3
+       // Nicer looking answers with parseFloat
         equation.finalAnswer = parseFloat(equation.finalAnswer);
     }
     // Adding new equation to the array
@@ -58,8 +59,6 @@ app.delete('/calculate/:index', (req, res) => {
     })
     res.sendStatus(201);
 })
-
-
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
